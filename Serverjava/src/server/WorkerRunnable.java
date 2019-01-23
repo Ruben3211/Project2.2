@@ -29,7 +29,7 @@ public class WorkerRunnable implements Runnable{
             bis = new BufferedInputStream(clientSocket.getInputStream());
             while ((num = bis.read(receivedData)) != -1) {
                 long time = System.currentTimeMillis();
-                String newfile = ("hoi2/" + time + "-" + MultiThreadedServer.verhoogEnHaalOp() + ".xml");
+                String newfile = ("xml_files/" + time + "-" + MultiThreadedServer.verhoogEnHaalOp() + ".xml");
 
                 bos = new BufferedOutputStream(new FileOutputStream(newfile));
                 bos.write(receivedData, 0, num);
