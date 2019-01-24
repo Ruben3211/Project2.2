@@ -1,0 +1,2 @@
+#! /bin/bash
+find "/home/ITV2E05/fileshare/" -name '*.xml' -type f  -mtime +30 -print0 | xargs -0 rm -f
