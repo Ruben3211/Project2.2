@@ -18,6 +18,7 @@ public class WorkerRunnable implements Runnable{
 
     public void run() {
         try {
+            //long start = System.currentTimeMillis();
             InputStream input  = clientSocket.getInputStream();
             OutputStream output = clientSocket.getOutputStream();
 
@@ -29,17 +30,18 @@ public class WorkerRunnable implements Runnable{
             bis = new BufferedInputStream(clientSocket.getInputStream());
             while ((num = bis.read(receivedData)) != -1) {
                 long time = System.currentTimeMillis();
-                String newfile = ("xml_files/" + time + "-" + MultiThreadedServer.verhoogEnHaalOp() + ".xml");
+                String newfile = (time + "-" + MultiThreadedServer.verhoogEnHaalOp() + ".xml");
 
                 bos = new BufferedOutputStream(new FileOutputStream(newfile));
                 bos.write(receivedData, 0, num);
                 bos.close();
 
                 // strFileContents += new String(receivedData, 0, num);
-                // System.out.print(newfile + "\n" + strFileContents);
+                System.out.println(newfile);
             }
             bis.close();
             out.println("File received ");
+
         } catch (IOException e) {
             //report exception somewhere.
             e.printStackTrace();

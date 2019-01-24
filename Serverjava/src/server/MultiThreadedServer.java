@@ -26,7 +26,6 @@ public class MultiThreadedServer implements Runnable{
             Socket clientSocket = null;
             try {
                 clientSocket = this.serverSocket.accept();
-                System.out.println("Client Connected");
             } catch (IOException e) {
                 if(isStopped()) {
                     System.out.println("Server Stopped.") ;
@@ -50,11 +49,8 @@ public class MultiThreadedServer implements Runnable{
 
     public static synchronized int verhoogEnHaalOp(){
         filenumber++;
+        if (filenumber < 1000){ filenumber = 1; }
         return filenumber;
-    }
-
-    public static synchronized void verhoogFileNumber(){
-        filenumber++;
     }
 
     public synchronized void stop(){
