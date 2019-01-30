@@ -2,13 +2,11 @@
 <html>
 <head>
 <?php
-include('Header.php');
-session_start();
-
-
+include('include.php');
 if(empty($_SESSION['name'])){
-  echo "Hello!";
-} else{ 
+  echo "Hello! <br>"; 
+    echo $_SESSION['username'];
+} else{
   ?> laatst bezochte stad is: <a href="test.php?name=<?php
   echo $_SESSION['name'];
   ?> "><?php echo strtolower(ucfirst($_SESSION['name']));?> </a></br><?php
@@ -18,5 +16,6 @@ if(empty($_SESSION['name'])){
   echo $_SESSION['long'] . "</br>";
   echo $_SESSION['alt'] . "</br>";
   echo $_SESSION['get'] . "</br";
-} 
+
+}
 ?>

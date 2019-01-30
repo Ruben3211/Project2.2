@@ -3,8 +3,7 @@
 <head style="background-color:white;">
 
   <?php
-  session_start();
-  include('Header.php');
+  include('include.php');
   $row = 1;
 if (($handle = fopen("statfra.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -32,13 +31,13 @@ if (($handle = fopen("statfra.csv", "r")) !== FALSE) {
   <div class="leftcolumn">
       <div class="card">
         <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for names.." title="Type in a name">
-          <div class="vertical-menu">         
+          <div class="vertical-menu">
 <?php
                 for($x = 0; $x < $_SESSION['get']; $x++){
 ?>
-                <a href="layout.php?name=<?php echo $_SESSION['city'][$x]; ?>" class="<?php if(strtoupper($_GET["name"]) == strtoupper($_SESSION['city'][$x])){ echo "active";} else{ echo "passive"; } ?>"> 
+                <a href="layout.php?name=<?php echo $_SESSION['city'][$x]; ?>" class="<?php if(strtoupper($_GET["name"]) == strtoupper($_SESSION['city'][$x])){ echo "active";} else{ echo "passive"; } ?>">
 
-<?php 
+<?php
                 echo $_SESSION['city'][$x];
 ?>
                 </a>
@@ -64,16 +63,16 @@ if (($handle = fopen("statfra.csv", "r")) !== FALSE) {
 
 </div>
     <div class="rightleftcolumn">
-      <h3 style="background-color: #0761aa; padding: 10px; color: white;">Temperature</h3>   
+      <h3 style="background-color: #0761aa; padding: 10px; color: white;">Temperature</h3>
       <p><div id="chartContainer" style="height: 250px; width: 100%;"></div></p>
   </div>
   <div class="rightrightcolumn">
       <h3 style="background-color: #0761aa; padding: 10px; color: white;">Temperature</h3>
-        
+
         <div id="chartContainer2" style="height: 250px; width: 100%;"></div>
   </div>
 <div class="card">
-  <?php 
+  <?php
 
 $files = glob("Data/*xml");
 
