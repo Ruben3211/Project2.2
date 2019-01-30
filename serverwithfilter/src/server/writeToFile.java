@@ -13,10 +13,11 @@ public class writeToFile {
 
         try {
             for(int m = 0; m < 10; m++){
-                String reqString = stringsel[m].substring(stringsel[m].indexOf("<STN>") + 5 , stringsel[m].indexOf("</STN>"));
+                    String reqString = stringsel[m].substring(stringsel[m].indexOf("<STN>") + 5 , stringsel[m].indexOf("</STN>"));
                 if (MultiThreadedServer.checkarray(reqString)) {
 
                     //System.out.println(stringsel[m]);
+
 
                     MultiThreadedServer.bufferForFile.add(stringsel[m]);
                     System.out.println(MultiThreadedServer.bufferForFile.size());
@@ -24,6 +25,21 @@ public class writeToFile {
                     //MultiThreadedServer.fillarray(bufferForFile,stringsel[m]);
                     if(MultiThreadedServer.bufferForFile.size() > 170) {
                         String multiToString = MultiThreadedServer.bufferForFile.toString();
+
+//                        Strip string to generate a good XML file
+                        multiToString = multiToString.replace(",", "");  //remove the commas
+                        multiToString = multiToString.replace("[", ""); //remove the right bracket
+                        multiToString = multiToString.replace("]", "");  //remove the left bracket
+                        multiToString = multiToString.replace("<?xml version=\"1.0\"?>", "");  //remove the random xml tags
+                        multiToString = multiToString.replace("<WEATHERDATA>", "");  //remove the random xml tags
+                        multiToString = multiToString.replace("</WEATHERDATA>", "");  //remove the random xml tags
+                        multiToString = multiToString.trim();           //remove trailing spaces from partially initialized arrays
+
+
+                        multiToString = "<WEATHERDATA>" + "\n" + "\t" + multiToString;
+                        multiToString = "<?xml version=\"1.0\"?>" + "\n" + multiToString;
+                        multiToString = multiToString + "\n" + "</WEATHERDATA>" ;
+
 
                         bos = new BufferedOutputStream(new FileOutputStream(newfile));
                         bos.write(multiToString.getBytes(), 0, multiToString.length());
@@ -49,4 +65,5 @@ public class writeToFile {
     public static synchronized void deleteArray(){
         MultiThreadedServer.bufferForFile.clear();
     }
+
 }
