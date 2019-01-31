@@ -3,7 +3,7 @@ include("include.php"); // Include alle pagina's.
 
 if(isset($_SESSION['auth']))
 {
-	header('Location: Home.php');
+print('<meta http-equiv="refresh" content="0; URL=Home.php">');
   	die();
 }
 

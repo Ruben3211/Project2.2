@@ -5,7 +5,6 @@
 include('include.php');
 if(empty($_SESSION['name'])){
   echo "Hello! <br>"; 
-    echo $_SESSION['username'];
 } else{
   ?> laatst bezochte stad is: <a href="test.php?name=<?php
   echo $_SESSION['name'];
