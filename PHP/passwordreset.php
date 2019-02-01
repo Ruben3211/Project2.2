@@ -23,7 +23,7 @@ $pwh = password_hash($password1, PASSWORD_DEFAULT);
 $query = "UPDATE usr SET password ='". $pwh . "' WHERE idusr ='". $_SESSION["usr_id"] . "'";
     $result = mysqli_query($db, $query) or die("FOUT" . mysqli_error($db));
 $meldingen[] = "U wachtwoord is succesvol gewijzigd.  <br />Als u na 5 seconden niet wordt doorverwezen, <a href=\"login.php\">klik dan hier</a>.";
-print('<meta http-equiv="refresh" content="5; URL=Home.php">');
+print('<meta http-equiv="refresh" content="5; URL=index.php">');
   }
   else{
     $foutmeldingen[] = "password is not correct";
