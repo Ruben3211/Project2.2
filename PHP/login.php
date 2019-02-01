@@ -1,9 +1,10 @@
 <?php
-include("include.php"); // Include alle pagina's.
-
+include("dbconnect.php"); // Include alle pagina's.
+include("functions.php");
+session_start();
 if(isset($_SESSION['auth']))
 {
-print('<meta http-equiv="refresh" content="0; URL=Home.php">');
+print('<meta http-equiv="refresh" content="0; URL=index.php">');
   	die();
 }
 
@@ -25,8 +26,7 @@ if(!empty($_POST))
 		{
 			$success = 1;
 			do_login($row["idusr"], time() + 120, $user, $row["is_admin"]);
-			print('<meta http-equiv="refresh" content="0; URL=Home.php">');
-		//	header("Location: Home.php");
+			print('<meta http-equiv="refresh" content="0"; URL=index.php?name=abbeville">');
 
    	 		exit();
 		}
@@ -37,7 +37,6 @@ if(!empty($_POST))
 }
 
 $logged_in = false;
-//show_header("Inloggen", $logged_in);
 
 // Print de fouten en meldingen naar het scherm.
 print_fouten();

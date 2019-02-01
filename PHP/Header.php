@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php session_start(); ?>
+	<?php // session_start(); ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
@@ -124,7 +124,7 @@ body {
 
 /* Create two unequal columns that floats next to each other */
 /* Left column */
-.leftcolumn {   
+.leftcolumn {
   float: left;
   width: 25%;
   background-color: #f6f6f6;
@@ -190,7 +190,7 @@ body {
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
-  .leftcolumn, .rightcolumn {   
+  .leftcolumn, .rightcolumn {
     width: 100%;
     padding: 0;
   }
@@ -237,7 +237,7 @@ body {
 </div>
 
 <div class="topnav">
-  <a href="layout.php?name=<?php if(!empty($_GET['name'])) {echo $_GET['name']; } else { echo "abbeville"; } ?>">Places</a>
+  <a href="index.php?name=<?php if(!empty($_GET['name'])) {echo $_GET['name']; } else { echo "abbeville"; } ?>">Places</a>
   <a href="admin.php">Admin</a>
   <a href="logout.php" style="float: right;">Logout</a>
 </div>
