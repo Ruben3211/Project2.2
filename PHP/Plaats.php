@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <head>
-	<?php
-
-	?>
 	<style>
        /* Set the size of the div element that contains the map */
       #map {
@@ -13,7 +10,7 @@
 </head>
 <body>
 <?php
-include('include.php');
+include('Header.php');
 
 $row = 1;
  if (($handle = fopen("statfra.csv", "r")) !== FALSE) {
@@ -68,7 +65,7 @@ $row = 1;
 
 </div>
 
-<?php
+<?php	
 
 $files = glob("Data/*xml");
 

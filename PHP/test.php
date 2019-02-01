@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <?php
-include('include.php');
-?
+include('Header.php');
+session_start();
+?>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -105,10 +106,10 @@ if (($handle = fopen("statfra.csv", "r")) !== FALSE) {
   <nav>
     <?php
       for($x = 0; $x < $_SESSION['get']; $x++){
-    ?>
-    <a href="test.php?name=<?php echo $_SESSION['city'][$x];?>">
+    ?> 
+    <a href="test.php?name=<?php echo $_SESSION['city'][$x];?>"> 
 
-    <?php
+    <?php 
       echo $_SESSION['city'][$x] . "</br>";
     ?>
 
@@ -118,7 +119,7 @@ if (($handle = fopen("statfra.csv", "r")) !== FALSE) {
 ?>
   </a>
   </nav>
-
+  
   <article>
 
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>

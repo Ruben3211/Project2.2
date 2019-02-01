@@ -2,8 +2,8 @@
 <html>
 <head>
 <?php
-include('include.php');
-
+include('Header.php');
+session_start();
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -77,17 +77,17 @@ $_SESSION['city'] = $city;
 <ul id="myUL">
 <?php
 for($x = 0; $x < $_SESSION['get']; $x++){
-?>
+?> 
 
     <li><a href="layout.php?name=
 
-<?php
+<?php 
   echo $_SESSION['city'][$x];
 ?>
 
-">
+"> 
 
-<?php
+<?php 
   echo $_SESSION['city'][$x];
 ?>
 
