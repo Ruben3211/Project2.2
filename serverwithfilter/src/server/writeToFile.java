@@ -1,32 +1,43 @@
 package server;
 
+import com.sun.deploy.util.ArrayUtil;
+
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class writeToFile {
 
-    public static synchronized void write(byte[] receivedData, String newfile, String strFileContents, int num, BufferedOutputStream bos){
-
-        strFileContents += new String(receivedData, 0, num);
-        String[] stringsel = strFileContents.split("(?<=</MEASUREMENT>)");
+    public static synchronized void write(String newfile, String strFileContents, BufferedOutputStream bos){
 
         try {
-            for(int m = 0; m < 10; m++){
-                    String reqString = stringsel[m].substring(stringsel[m].indexOf("<STN>") + 5 , stringsel[m].indexOf("</STN>"));
-                if (MultiThreadedServer.checkarray(reqString)) {
+            List<String> stringsel = new LinkedList<String>(Arrays.asList(strFileContents.split("(?<=</MEASUREMENT>)")));
 
+            stringsel.remove(stringsel.size() - 1);
+            for(String insertString : stringsel){
+                
+                System.out.println(stringsel.size());
+
+                String reqString = insertString.substring(insertString.indexOf("<STN>") + 5 ,insertString.indexOf("</STN>"));
+                //System.out.println(reqString);
+
+                if (MultiThreadedServer.checkarray(reqString)) {
                     //System.out.println(stringsel[m]);
 
 
-                    MultiThreadedServer.bufferForFile.add(stringsel[m]);
-                    System.out.println(MultiThreadedServer.bufferForFile.size());
+                    MultiThreadedServer.bufferForFile.add(insertString);
+                    //System.out.println(MultiThreadedServer.bufferForFile.size());
 
                     //MultiThreadedServer.fillarray(bufferForFile,stringsel[m]);
-                    if(MultiThreadedServer.bufferForFile.size() > 170) {
+                    if(MultiThreadedServer.bufferForFile.size() > 170 ) {
                         String multiToString = MultiThreadedServer.bufferForFile.toString();
+                        //System.out.println(multiToString);
 
-//                        Strip string to generate a good XML file
+//                      Strip string to generate a good XML file
                         multiToString = multiToString.replace(",", "");  //remove the commas
                         multiToString = multiToString.replace("[", ""); //remove the right bracket
                         multiToString = multiToString.replace("]", "");  //remove the left bracket
@@ -35,7 +46,7 @@ public class writeToFile {
                         multiToString = multiToString.replace("</WEATHERDATA>", "");  //remove the random xml tags
                         multiToString = multiToString.trim();           //remove trailing spaces from partially initialized arrays
 
-
+//                      Redo the XML tags but now in the correct places
                         multiToString = "<WEATHERDATA>" + "\n" + "\t" + multiToString;
                         multiToString = "<?xml version=\"1.0\"?>" + "\n" + multiToString;
                         multiToString = multiToString + "\n" + "</WEATHERDATA>" ;
@@ -51,7 +62,7 @@ public class writeToFile {
                     }
                 }
             }
-            //bis.close();
+
         } catch (IOException e) {
             //report exception somewhere.
             e.printStackTrace();
@@ -62,7 +73,7 @@ public class writeToFile {
 
     }
 
-    public static synchronized void deleteArray(){
+    private static synchronized void deleteArray(){
         MultiThreadedServer.bufferForFile.clear();
     }
 

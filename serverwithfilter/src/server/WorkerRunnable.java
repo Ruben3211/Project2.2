@@ -35,10 +35,10 @@ public class WorkerRunnable implements Runnable{
                 long time = System.currentTimeMillis();
                 String newfile = (time + "-" + MultiThreadedServer.verhoogEnHaalOp() + ".xml");
 
-                // strFileContents += new String(receivedData, 0, num);
+                strFileContents += new String(receivedData, 0, num);
 
                 //write the data
-                writeToFile.write(receivedData,newfile,strFileContents,num,bos);
+                writeToFile.write(newfile,strFileContents,bos);
 
 
                 //System.out.println(newfile);
