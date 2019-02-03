@@ -1,7 +1,5 @@
 package server;
 
-import com.sun.deploy.util.ArrayUtil;
-
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,8 +13,10 @@ public class writeToFile {
     public static synchronized void write(String newfile, String strFileContents, BufferedOutputStream bos){
 
         try {
+
             List<String> stringsel = new LinkedList<String>(Arrays.asList(strFileContents.split("(?<=</MEASUREMENT>)")));
 
+//          Remove weatherdata tag from list
             stringsel.remove(stringsel.size() - 1);
             for(String insertString : stringsel){
                 
@@ -62,7 +62,8 @@ public class writeToFile {
                     }
                 }
             }
-
+            //System.out.println("cleared stringsel");
+            stringsel.clear();
         } catch (IOException e) {
             //report exception somewhere.
             e.printStackTrace();
@@ -70,7 +71,6 @@ public class writeToFile {
 
 
 //                END FILTER CODE
-
     }
 
     private static synchronized void deleteArray(){

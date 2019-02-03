@@ -22,30 +22,31 @@ public class WorkerRunnable implements Runnable{
     public void run() {
         try {
             //long start = System.currentTimeMillis();
-            InputStream input  = clientSocket.getInputStream();
-            OutputStream output = clientSocket.getOutputStream();
+            InputStream input  = this.clientSocket.getInputStream();
+            OutputStream output = this.clientSocket.getOutputStream();
 
             BufferedReader inm = new BufferedReader(new InputStreamReader(input));
             PrintWriter out = new PrintWriter(output, true /* autoFlush */);
 
-            // String strFileContents = "";
             byte[] receivedData = new byte[8192];
             bis = new BufferedInputStream(clientSocket.getInputStream());
             while ((num = bis.read(receivedData)) != -1){
                 long time = System.currentTimeMillis();
-                String newfile = (time + "-" + MultiThreadedServer.verhoogEnHaalOp() + ".xml");
+                String newfile = (time + ".xml");
 
-                strFileContents += new String(receivedData, 0, num);
-
+                this.strFileContents += new String(receivedData,0,num);
+                //System.out.println(strFileContents + "hier naar kijken");
                 //write the data
-                writeToFile.write(newfile,strFileContents,bos);
+                writeToFile.write(newfile,this.strFileContents,bos);
 
+                //this.strFileContents = "";
 
                 //System.out.println(newfile);
             }
-            bis.close();
-            out.println("File received ");
 
+            System.out.println("File received ");
+            //bos.close();
+            bis.close();
         } catch (IOException e) {
             //report exception somewhere.
             e.printStackTrace();

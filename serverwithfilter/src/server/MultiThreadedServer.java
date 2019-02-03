@@ -20,7 +20,7 @@ public class MultiThreadedServer implements Runnable{
     protected Thread       runningThread= null;
     public static int      filenumber   = 0;
     public static List<String> bufferForFile = Collections.synchronizedList(new ArrayList<String>());
-    ExecutorService exser = Executors.newFixedThreadPool(400);
+    ExecutorService exser = Executors.newFixedThreadPool(40);
 
 
     static ArrayList arl = new ArrayList();
@@ -49,7 +49,7 @@ public class MultiThreadedServer implements Runnable{
                 throw new RuntimeException(
                         "Error accepting client connection", e);
             }
-            exser.execute(
+            this.exser.execute(
             (
                     new WorkerRunnable(
                             clientSocket, "Multithreaded Server")
@@ -61,21 +61,6 @@ public class MultiThreadedServer implements Runnable{
 
     private synchronized boolean isStopped() {
         return this.isStopped;
-    }
-
-    public static synchronized int verhoogEnHaalOp(){
-        filenumber++;
-        if (filenumber > 1000){ filenumber = 1; }
-        return filenumber;
-    }
-
-    public synchronized void stop(){
-        this.isStopped = true;
-        try {
-            this.serverSocket.close();
-        } catch (IOException e) {
-            throw new RuntimeException("Error closing server", e);
-        }
     }
 
     private void openServerSocket() {
