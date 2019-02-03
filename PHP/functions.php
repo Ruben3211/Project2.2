@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
+
 function do_login($id, $timeout, $username, $is_admin)
 {
   $_SESSION["auth"] = true;

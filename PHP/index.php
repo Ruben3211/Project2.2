@@ -43,7 +43,7 @@ if (($handle = fopen("statfra.csv", "r")) !== FALSE) {
 <?php
                 for($x = 0; $x < $_SESSION['get']; $x++){
 ?>
-                <li><a href="index.php?name=<?php echo $_SESSION['city'][$x] . "#" . $_SESSION['city'][$x]; ?>" class="<?php if(strtoupper($_GET["name"]) == strtoupper($_SESSION['city'][$x])){ echo "active";} else{ echo "passive"; } ?>">
+                <title><?php echo ucwords(strtolower($_GET["name"])); ?></title><li><a href="index.php?name=<?php echo $_SESSION['city'][$x] . "#" . $_SESSION['city'][$x]; ?>" class="<?php if(strtoupper($_GET["name"]) == strtoupper($_SESSION['city'][$x])){ echo "active";} else{ echo "passive"; } ?>">
 
 <?php
                 echo $_SESSION['city'][$x];
@@ -113,7 +113,7 @@ if(!empty($xas)){
       <div class="h2"><?php echo ucwords(strtolower($_SESSION["name"])); ?></div>
     <body onload="initialize_map(); add_map_point(<?php echo $_SESSION["lati"]; ?>, <?php echo $_SESSION["long"]; ?>);"></body>
   <div id="map" style="width: 100%; height: 250px;"></div>
-  <h3  id="<?php echo ucwords(strtolower($_SESSION["name"])); ?>"style="background-color: #0761aa; padding: 10px; color: white;">Live data</h3>
+  <h3 style="background-color: #0761aa; padding: 10px; color: white;">Live data</h3>
   <?php
   if(!empty($xas)){
   ?>

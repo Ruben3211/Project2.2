@@ -38,7 +38,7 @@
 }
 
 #myInput {
-  background-image: url('/css/searchicon.png');
+  background-image: url('searchicon.png');
   background-position: 10px 12px;
   background-repeat: no-repeat;
   width: 100%;
@@ -114,6 +114,9 @@ body {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
 }
 
 /* Change color on hover */
@@ -132,29 +135,40 @@ body {
 
 /* Right column */
 .rightcolumn {
-  float: left;
+  float: right;
   width: 75%;
+  background-color: #f6f6f6;
+}
+
+.adminrightcolumn {
+  float: left;
+  width: 50%;
+  background-color: #f6f6f6;
+}
+
+.adminrightrightcolumn{
+  float: right;
+  width: 40%;
+  background-color: #f6f6f6;
+}
+
+.adminrightleftcolumn{
+  float: left;
+  width: 40%;
   background-color: #f6f6f6;
 }
 
 .rightleftcolumn {
   float: left;
-  width: 49%;
+  width: 50%;
   background-color: #f6f6f6;
 }
 
 .rightrightcolumn {
   float: right;
-  width: 49%;
+  width: 50%;
   background-color: #f6f6f6;
 
-}
-
-/* Fake image */
-.fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
 }
 
 /* Add a card effect for articles */
@@ -171,6 +185,16 @@ body {
 	font-size: 25px;
 	color: white;
 	padding: 12px;
+}
+
+.h2admin {
+  background-color: #0761aa;
+  text-align: left;
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 25px;
+  color: white;
+  padding: 12px;
 }
 
 /* Clear floats after the columns */
@@ -199,7 +223,6 @@ body {
 /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
 @media screen and (max-width: 400px) {
   .topnav a {
-    float: none;
     width: 100%;
   }
 }
@@ -228,6 +251,81 @@ body {
   color: white;
 }
 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  color: #0761aa;
+}
+
+td, th {
+  border: 1px solid #0761aa;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #0761aa;
+  color: white;
+}
+
+tr:nth-child(even) a{
+  background-color: #0761aa;
+  color: white;
+}
+
+.adminbutton a {
+  margin-top: 30px;
+  border: none;
+  color: white;
+  width: 100%;
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 1s; /* Safari */
+  transition-duration: 1s;
+  cursor: pointer;
+  background-color: #0761aa;
+  color: white; 
+  border: 2px solid #0761aa;
+}
+
+.adminbutton a:hover {
+  background-color: white;
+  color: #0761aa;
+  border-bottom: 2px solid #0761aa;
+}
+
+.button { /* Green */
+  border: none;
+  color: white;
+  width: 100%;
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 7px;
+  font-size: 16px;
+  -webkit-transition-duration: 1s; /* Safari */
+  transition-duration: 1s;
+  cursor: pointer;
+
+}
+
+.button {
+  background-color: #0761aa;
+  color: white; 
+  border: 2px solid #0761aa;
+
+}
+
+.button:hover {
+  background-color: white;
+  color: #0761aa;
+  border-bottom: 2px solid #0761aa;
+}
 </style>
 </head>
 <body>
@@ -238,11 +336,19 @@ body {
 
 <div class="topnav">
   <a href="index.php?name=<?php if(!empty($_GET['name'])) {echo $_GET['name']; } else { echo "abbeville"; } ?>">Places</a>
+  <?php 
+  if($_SESSION["is_admin"] == 1){
+  ?>
   <a href="admin.php">Admin</a>
+  <?php
+  }
+  ?>
+  <a href="changepassword.php">Change password</a>
   <a href="logout.php" style="float: right;">Logout</a>
 </div>
 
 <?php
+
 if(empty($_SESSION['city'])){
   if (($handle = fopen("Plaatsen.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
