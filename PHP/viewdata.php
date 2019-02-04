@@ -20,7 +20,7 @@ include('include.php');
     </tr>
 </table>
 </div>
-<div  style="height:400px; overflow:auto; width: 100%;">
+<div  style="height:390px; overflow:auto; width: 100%;">
 <table>
     <?php for($x = 0; $x < count($_SESSION["xas"]); $x++){
       ?>
@@ -96,11 +96,11 @@ include('include.php');
 </table>
 </div>
 <?php
-unset($_SESSION["date"]);
-unset($_SESSION["xas"]);
-unset($_SESSION["wdsp"]);
-unset($_SESSION["stp"]);
-unset($_SESSION["wnddir"]);
+
+?>
+<div class="footer">
+<?php
+echo "&copy; " . date("Y") . " SpaceGems";
 ?>
 </body>
 </html>

@@ -84,15 +84,30 @@ if(!empty($xas)){
   $wnddirryas = array_reverse($wnddiryas);
   $date = array_reverse($date);
 
-if(!isset($_SESSION["date"])){
-  for($x = 0; $x < count($xas); $x++){
+
+if(!isset($_SESSION["date"]) AND count($_SESSION["date"]) <= count($date)) {
+  for($x = 0; $x < count($date); $x++){
       $_SESSION["date"][] = $date[$x] . "";
       $_SESSION["xas"][] = $rxas[$x] . "";
       $_SESSION["wdsp"][] = $wdspryas[$x] . "";
       $_SESSION["stp"][] = $stpryas[$x] . "";
       $_SESSION["wnddir"][] = $wnddirryas[$x] . "";
-  }
+  } 
+  } elseif($_GET["name"] != $_SESSION["tempname"]) {
+      unset($_SESSION["date"]);
+      unset($_SESSION["xas"]);
+      unset($_SESSION["wdsp"]);
+      unset($_SESSION["stp"]);
+      unset($_SESSION["wnddir"]);
+        for($x = 0; $x < count($date); $x++){
+          $_SESSION["date"][] = $date[$x] . "";
+          $_SESSION["xas"][] = $rxas[$x] . "";
+          $_SESSION["wdsp"][] = $wdspryas[$x] . "";
+          $_SESSION["stp"][] = $stpryas[$x] . "";
+          $_SESSION["wnddir"][] = $wnddirryas[$x] . "";
+  } 
 }
+
   if(count($xas) > 59){
     for($x = 0; $x < 60; $x++){
       $fxas[] = $rxas[$x];
@@ -114,7 +129,6 @@ if(!isset($_SESSION["date"])){
   $stprfyas = array_reverse($stpfyas);
   $wnddirrfyas = array_reverse($wnddirfyas);
 }
-
 ?>
   <div class="rightcolumn">
       
@@ -122,7 +136,7 @@ if(!isset($_SESSION["date"])){
     <body onload="initialize_map(); add_map_point(<?php echo $_SESSION["lati"]; ?>, <?php echo $_SESSION["long"]; ?>);"></body>
   <div id="map" style="width: 100%; height: 250px;"></div>
 
-  <h3 style="background-color: #0761aa; padding: 10px; color: white;">Live data</h3>
+  <h3 id="livedata" style="background-color: #0761aa; padding: 10px; color: white;">Live data</h3>
   <?php
   if(!empty($xas)){
   ?>
@@ -202,7 +216,10 @@ if(!isset($_SESSION["date"])){
     </tr>
   <?php } ?>
   <tr>
-    <td colspan="5"><a class="buttonadmin" href="viewdata.php">All data</a></td>
+    <td colspan="5"><input class="buttonlive" type="button" onClick="history.go(0)" value="Refresh"></button></td>
+  </tr>
+  <tr>
+    <td colspan="5"><a class="buttondata" href="viewdata.php">View all data</a></td>
   </tr>
 </table>
 
@@ -272,7 +289,7 @@ var chart = new Chart(ctx, {
 </script>
   </div>
   <div class="rightrightcolumn">
-      <h3 style="background-color: #0761aa; padding: 10px; color: white;">Air pressure</h3>
+      <h3 style="background-color: #0761aa; padding: 10px; margin-left: 10px; color: white;">Air pressure</h3>
 
     <canvas id="myChart1" width="100%" height="75px"></canvas>
 
@@ -329,9 +346,7 @@ var chart = new Chart(ctx, {
 
 </script>
 </div>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<h3 style="background-color: #0761aa; padding: 10px; color: white;">Wind direction</h3>
+<h3 style="background-color: #0761aa; padding: 10px; margin-top: 525px; color: white;">Wind direction</h3>
 
 <canvas id="myChart2" width="100%" height="20px"></canvas>
 

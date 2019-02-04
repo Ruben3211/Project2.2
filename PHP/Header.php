@@ -211,10 +211,13 @@ body {
 
 /* Footer */
 .footer {
-  padding: 15px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #0761aa;
+  color: white;
   text-align: center;
-  background: #f6f6f6;
-  margin-top: 20px;
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
@@ -234,7 +237,7 @@ body {
 
 .vertical-menu {
   width: 100%;
-  height: 1210px;
+  height: 1280px;
   overflow-y: auto;
 }
 
@@ -331,6 +334,55 @@ tr:nth-child(even) a{
   color: #0761aa;
   border-bottom: 2px solid #0761aa;
 }
+
+.buttonlive { /* Green */
+  border: none;
+  color: white;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 1s; /* Safari */
+  transition-duration: 1s;
+  cursor: pointer;
+}
+
+.buttonlive {
+  background-color: #0761aa;
+  color: white; 
+  padding: 5px;
+
+}
+
+.buttonlive:hover {
+  background-color: white;
+  color: #0761aa;
+}
+
+.buttondata { /* Green */
+  border: none;
+  color: white;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 1s; /* Safari */
+  transition-duration: 1s;
+  cursor: pointer;
+}
+
+.buttondata {
+  color: #0761aa;
+  padding: 5px;
+
+}
+
+.buttondata:hover {
+  background-color: #0761aa;
+  color: white;
+}
 </style>
 </head>
 <body>
@@ -340,7 +392,7 @@ tr:nth-child(even) a{
 </div>
 
 <div class="topnav">
-  <a href="index.php?name=<?php if(!empty($_GET['name'])) {echo $_GET['name']; } else { echo "abbeville"; } ?>">Places</a>
+  <a href="index.php?name=<?php if(!empty($_GET['name'])) {echo $_GET['name']; } else { echo $_SESSION["currname"]; } ?>">Places</a>
   <?php 
   if($_SESSION["is_admin"] == 1){
   ?>

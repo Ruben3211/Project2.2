@@ -154,5 +154,9 @@ if(!empty($_GET["addaccount"]) && $_GET["addaccount"] == "addaccount"){
 <?php
 }
 ?>
+<div class="footer" style="width: 100%;">
+<?php
+echo "&copy; " . date("Y") . " SpaceGems";
+?>
 </body>
 </html>

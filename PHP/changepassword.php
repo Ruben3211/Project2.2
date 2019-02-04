@@ -73,7 +73,7 @@ print_meldingen();
 	</div>
 </div>
 
+<div class="footer">
 <?php
-	// hier moet de footer
-
-  ?>
+echo "&copy; " . date("Y") . " SpaceGems";
+?>

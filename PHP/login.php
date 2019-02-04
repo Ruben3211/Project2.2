@@ -96,6 +96,15 @@ input[type=password]:focus {
   width: 33.33%;
   background-color: white;
 }
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #0761aa;
+  color: white;
+  text-align: center;
+}
 
 </style>
 <?php
@@ -159,5 +168,9 @@ print_meldingen();
 </form>
 </div>
 <div class="rightcolumn"><br></div>
+<div class="footer">
+<?php
+echo "&copy; " . date("Y") . " SpaceGems";
+?>
 </body>
 </html>
