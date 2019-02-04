@@ -13,7 +13,7 @@ public class WorkerRunnable implements Runnable{
     String strFileContents = "";
 	String strFileContents2 = "";
 	boolean wat = false;
-   
+
 
     public WorkerRunnable(Socket clientSocket, String serverText) {
         this.clientSocket = clientSocket;
@@ -29,14 +29,13 @@ public class WorkerRunnable implements Runnable{
 //            BufferedReader inm = new BufferedReader(new InputStreamReader(input));
 //            PrintWriter out = new PrintWriter(output, true /* autoFlush */);
 
-            // String strFileContents = "";
             byte[] receivedData = new byte[8192];
             bis = new BufferedInputStream(clientSocket.getInputStream());
             while ((num = this.bis.read(receivedData)) != -1){
                 long time = System.currentTimeMillis();
                 String newfile = ("/mnt/share/"+time+".xml");
 
-                
+
                 //write the data
                 if(wat == true) {
                 	this.strFileContents += new String(receivedData, 0, num);
@@ -52,16 +51,19 @@ public class WorkerRunnable implements Runnable{
                 }
                 //System.out.println(newfile);
             }
-            
+
             //out.println("File received ");
             input.close();
             output.close();
 
+            System.out.println("File received ");
+            //bos.close();
+            bis.close();
         } catch (IOException e) {
             //report exception somewhere.
             e.printStackTrace();
         }
-        
+
     }
 
 
