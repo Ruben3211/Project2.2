@@ -16,14 +16,16 @@ if(!empty($_POST))
 	$password2= mysqli_real_escape_string($db, $_POST['pwd2']);
 
 if($password1 === $password2){
-if(is_geldig_wachtwoord($password1))//controleert of het eerste wachtwoord geldig is.
+//controleert of het eerste wachtwoord geldig is.
+if(is_geldig_wachtwoord($password1))
 	{
 
 $pwh = password_hash($password1, PASSWORD_DEFAULT);
 $query =  "INSERT INTO usr (username, password, is_admin) VALUES ('$username', '$pwh', '$admin')";
   $result = mysqli_query($db, $query) or die("FOUT" . mysqli_error($db));
+  $_SESSION["newacc"] = $username;
   ?>
-  	<p>User <?php echo $username ?> is added</p>
+  	
     <META HTTP-EQUIV="refresh" CONTENT="5">
 <?php
   }
@@ -74,14 +76,17 @@ if ($result->num_rows > 0) {
 <?php
 if(!empty($_SESSION["newacc"])){
 ?>
-	<p>New user <?php echo $_SESSION["newacc"]; ?> is made</p>
+	<div class="alert-newaccount"> User <?php echo $_SESSION["newacc"]; ?> is added</div>
 <?php
 	unset($_SESSION['newacc']);
 } elseif (!empty($_SESSION["delacc"])) {
 ?>
-	<p>User <?php echo $_SESSION["delacc"]; ?> is deleted</p>
+	<div class="alert-newaccount">User <?php echo $_SESSION["delacc"]; ?> is deleted</div>
 <?php
 	unset($_SESSION["delacc"]);
+	?>
+	<META HTTP-EQUIV="refresh" CONTENT="5">
+<?php
 }
 ?>
 <div class="h2admin">Admin <?php echo $user; ?></div>

@@ -1,5 +1,4 @@
 <?php
-
 function is_geldig_wachtwoord($wachtwoord)
 {
   return (preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,64}$/', $wachtwoord) == 1);
@@ -19,18 +18,18 @@ function do_login($id, $timeout, $username, $is_admin)
 function fout($melding) {
   global $fout;
   global $foutmeldingen;
-  $foutmeldingen[] = $melding;
+  $foutmeldingen[] = $melding; 
   $fout = true;
 }
 
 function print_fouten() {
   global $foutmeldingen;
   if (count($foutmeldingen) == 0) return;
-  print('<div class="alert alert-danger" role="alert">');
+  print('<div class="alert-danger" role="alert">');
   $eerste = true;
   foreach ($foutmeldingen as $fout) {
     if (!$eerste) print("<br>");
-    print(" - " . $fout);
+    print($fout);
     $eerste = false;
   }
   print("</div>");
@@ -39,11 +38,11 @@ function print_fouten() {
 function print_meldingen() {
   global $meldingen;
   if (count($meldingen) == 0) return;
-  print('<div class="alert alert-info" role="alert">');
+  print('<div class="alert-info" role="alert">');
   $eerste = true;
   foreach ($meldingen as $melding) {
     if (!$eerste) print("<br>");
-    print(" - " . $melding);
+    print($melding);
     $eerste = false;
   }
   print("</div>");

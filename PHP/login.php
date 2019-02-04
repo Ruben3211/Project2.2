@@ -42,9 +42,6 @@ if(!empty($_POST))
 
 $logged_in = false;
 
-// Print de fouten en meldingen naar het scherm.
-print_fouten();
-print_meldingen();
 ?>
 </head>
 <body>
@@ -52,6 +49,10 @@ print_meldingen();
   <img src="Images/logo.png" alt="Logo Onera" height="170px" width="33%">
 </div>
 <div style="background-color: #0761aa; height: 47px; width: 100%;"></div>
+<?php
+print_fouten();
+print_meldingen();
+?>
 <div class="leftcolumn"><br></div>
 <form method="post" action="login.php">
 	<div class="centercolumn">
@@ -61,6 +62,10 @@ print_meldingen();
 				<input type="password" class="form-control" name="password" id="password" required>
 					<button class="button" type="submit">Login</button>
 </form>
+<?php
+// Print de fouten en meldingen naar het scherm.
+
+?>
 </div>
 <div class="rightcolumn"><br></div>
 <div class="footer">

@@ -374,4 +374,50 @@ tr:nth-child(even) a{
   background-color: #0761aa;
   color: white;
 }
+
+.alert-danger {
+  font-size: 15px;
+  border: 2px;
+  border-color: red;
+  text-align: center;
+  opacity: 0.7;
+  border-style: solid;
+  background-color: #ff0000;
+  border-radius: 0px 0px 10px 10px;
+  padding: 20px;
+  margin-top: 10px;
+  color: white;
+  font-family: arial;
+}
+
+.alert-info {
+  font-size: 15px;
+  border: 2px;
+  border-color: red;
+  text-align: center;
+  opacity: 0.7;
+  border-style: solid;
+  background-color: #ff0000;
+  border-radius: 0px 0px 10px 10px;
+  padding: 20px;
+  margin-top: 10px;
+  color: white;
+  font-family: arial;
+}
+
+.alert-newaccount {
+  font-size: 15px;
+  border: 2px;
+  border-color: green;
+  text-align: center;
+  opacity: 0.7;
+  border-style: solid;
+  background-color: green;
+  border-radius: 0px 0px 10px 10px;
+  padding: 20px;
+  margin-top: 10px;
+  color: white;
+  font-family: arial;
+}
+
 </style>
