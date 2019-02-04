@@ -18,23 +18,19 @@ public class writeToFile {
 //          Remove weatherdata tag from list
             stringsel.remove(stringsel.size() - 1);
             for(String insertString : stringsel){
-                
-                System.out.println(stringsel.size());
 
-                String reqString = insertString.substring(insertString.indexOf("<STN>") + 5 ,insertString.indexOf("</STN>"));
-                //System.out.println(reqString);
+            if(insertString.contains("<STN>") && insertString.contains("<MEASUREMENT>") && insertString.contains("</MEASUREMENT>")) {
+                //System.out.println(stringsel.size());
+                    String reqString = insertString.substring(insertString.indexOf("<STN>") + 5, insertString.indexOf("</STN>"));
 
                 if (MultiThreadedServer.checkarray(reqString)) {
-                    //System.out.println(stringsel[m]);
 
 
                     MultiThreadedServer.bufferForFile.add(insertString);
-                    //System.out.println(MultiThreadedServer.bufferForFile.size());
 
-                    //MultiThreadedServer.fillarray(bufferForFile,stringsel[m]);
+
                     if(MultiThreadedServer.bufferForFile.size() > 170 ) {
                         String multiToString = MultiThreadedServer.bufferForFile.toString();
-                        //System.out.println(multiToString);
 
 //                      Strip string to generate a good XML file
                         multiToString = multiToString.replace(",", "");  //remove the commas
@@ -51,17 +47,15 @@ public class writeToFile {
                         multiToString = multiToString + "\n" + "</WEATHERDATA>" ;
 
 
-                        bos = new BufferedOutputStream(new FileOutputStream(newfile));
+                        bos = new BufferedOutputStream(new FileOutputStream(newfile),65536 );
                         bos.write(multiToString.getBytes(), 0, multiToString.length());
                         bos.close();
                         System.out.println("Cleared array list");
                         deleteArray();
-                        // /MultiThreadedServer.bufferForFile.clear();
 
-                    }
+                    }}
                 }
             }
-            //System.out.println("cleared stringsel");
             stringsel.clear();
         } catch (IOException e) {
             //report exception somewhere.

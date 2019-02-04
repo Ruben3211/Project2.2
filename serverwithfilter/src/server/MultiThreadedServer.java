@@ -19,7 +19,7 @@ public class MultiThreadedServer implements Runnable{
     protected Thread       runningThread= null;
     public static int      filenumber   = 0;
     public static List<String> bufferForFile = Collections.synchronizedList(new ArrayList<String>());
-    ExecutorService exser = Executors.newFixedThreadPool(40);
+    ExecutorService exser = Executors.newFixedThreadPool(400);
 
 
     static ArrayList<Integer> arl = new ArrayList<Integer>();
