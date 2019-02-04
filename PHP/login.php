@@ -1,106 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-.header {
-  text-align: center;
-  background: #f6f6f6;
-}
-
-.button { /* Green */
-  border: none;
-  color: white;
-  width: 100%;
-  padding: 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 7px;
-  font-size: 16px;
-  -webkit-transition-duration: 1s; /* Safari */
-  transition-duration: 1s;
-  cursor: pointer;
-}
-
-.button {
-  background-color: #0761aa;
-  color: white; 
-  border: 2px solid #0761aa;
-
-}
-
-.button:hover {
-  background-color: white;
-  color: #0761aa;
-  border-bottom: 2px solid #0761aa;
-}
-
-input[type=text], select {
-  width: 100%;
-  padding: 12px;
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  background-color: white;
-  border: 2px solid #0761aa;
-  box-sizing: border-box;
-  -webkit-transition-duration: 0.5s; /* Safari */
-  transition-duration: 0.5s;
-}
-
-input[type=text]:focus {
-  border: 2px solid #0761aa;
-  background-color: #0761aa;
-  color: white;
-}
-
-input[type=password]{
-  width: 100%;
-  padding: 12px;
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  background-color: white;
-  border: 2px solid #0761aa;
-  box-sizing: border-box;
-  -webkit-transition-duration: 0.5s; /* Safari */
-  transition-duration: 0.5s;
-}
-
-input[type=password]:focus {
-  border: 2px solid #0761aa;
-  background-color: #0761aa;
-  color: white;
-}
-
-.h1 {
-  font-size: 20px;
-  font-family: arial;
-  color: #0761aa;
-}
-
-.leftcolumn {
-  float: left;
-  width: 33.33%;
-  background-color: white;
-}
-
-.centercolumn {
-  float: left;
-  width: 33.34%;
-  background-color: white;
-}
-
-.rightcolumn {
-  float: left;
-  width: 33.33%;
-  background-color: white;
-}
-
-</style>
 <?php
 include("dbconnect.php"); // Include alle pagina's.
 include("functions.php");
+include("login.css");
 session_start();
 if(isset($_SESSION['auth']))
 {
@@ -159,5 +63,9 @@ print_meldingen();
 </form>
 </div>
 <div class="rightcolumn"><br></div>
+<div class="footer">
+<?php
+echo "&copy; " . date("Y") . " SpaceGems";
+?>
 </body>
 </html>

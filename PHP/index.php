@@ -43,7 +43,7 @@ if (($handle = fopen("statfra.csv", "r")) !== FALSE) {
 <?php
                 for($x = 0; $x < $_SESSION['get']; $x++){
 ?>
-                <title><?php echo ucwords(strtolower($_GET["name"])); ?></title><li><a href="index.php?name=<?php echo $_SESSION['city'][$x] . "#" . $_SESSION['city'][$x]; ?>" class="<?php if(strtoupper($_GET["name"]) == strtoupper($_SESSION['city'][$x])){ echo "active";} else{ echo "passive"; } ?>">
+                <title><?php echo ucwords(strtolower($_GET["name"])); ?></title><li><a href="index.php?name=<?php echo $_SESSION['city'][$x]; ?>" class="<?php if(strtoupper($_GET["name"]) == strtoupper($_SESSION['city'][$x])){ echo "active";} else{ echo "passive"; } ?>">
 
 <?php
                 echo $_SESSION['city'][$x];
@@ -84,6 +84,30 @@ if(!empty($xas)){
   $wnddirryas = array_reverse($wnddiryas);
   $date = array_reverse($date);
 
+
+if(!isset($_SESSION["date"]) AND count($_SESSION["date"]) <= count($date)) {
+  for($x = 0; $x < count($date); $x++){
+      $_SESSION["date"][] = $date[$x] . "";
+      $_SESSION["xas"][] = $rxas[$x] . "";
+      $_SESSION["wdsp"][] = $wdspryas[$x] . "";
+      $_SESSION["stp"][] = $stpryas[$x] . "";
+      $_SESSION["wnddir"][] = $wnddirryas[$x] . "";
+  } 
+  } elseif($_GET["name"] != $_SESSION["tempname"]) {
+      unset($_SESSION["date"]);
+      unset($_SESSION["xas"]);
+      unset($_SESSION["wdsp"]);
+      unset($_SESSION["stp"]);
+      unset($_SESSION["wnddir"]);
+        for($x = 0; $x < count($date); $x++){
+          $_SESSION["date"][] = $date[$x] . "";
+          $_SESSION["xas"][] = $rxas[$x] . "";
+          $_SESSION["wdsp"][] = $wdspryas[$x] . "";
+          $_SESSION["stp"][] = $stpryas[$x] . "";
+          $_SESSION["wnddir"][] = $wnddirryas[$x] . "";
+  } 
+}
+
   if(count($xas) > 59){
     for($x = 0; $x < 60; $x++){
       $fxas[] = $rxas[$x];
@@ -105,78 +129,104 @@ if(!empty($xas)){
   $stprfyas = array_reverse($stpfyas);
   $wnddirrfyas = array_reverse($wnddirfyas);
 }
-
-
 ?>
   <div class="rightcolumn">
-    <div class="card">
-      <div class="h2"><?php echo ucwords(strtolower($_SESSION["name"])); ?></div>
+      
+      <div class="h2" style="margin-top: 40px;"><?php echo ucwords(strtolower($_SESSION["name"])); ?></div>
     <body onload="initialize_map(); add_map_point(<?php echo $_SESSION["lati"]; ?>, <?php echo $_SESSION["long"]; ?>);"></body>
   <div id="map" style="width: 100%; height: 250px;"></div>
-  <h3 style="background-color: #0761aa; padding: 10px; color: white;">Live data</h3>
+
+  <h3 id="livedata" style="background-color: #0761aa; padding: 10px; color: white;">Live data</h3>
   <?php
   if(!empty($xas)){
   ?>
-  <p>Date: <?php echo date("d-m-Y", strtotime($date[0])); ?></p>
-  <p>Time: <?php echo $fxas[0]; ?></p>
-  <p>Windspeed: <?php echo $wdspfyas[0]; ?> km/h</p>
-  <p>Air pressure: <?php echo $stpfyas[0]; ?> mbar</p>
-  <p>Wind direction: <?php
-      switch($wnddirfyas[0]){
-        case $wnddirfyas[0] >= 0.00 && $wnddirfyas[0] <= 11.25:
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Windspeed in km/h</th>
+      <th>Air pressure in mbar</th>
+      <th>Wind direction</th>     
+    </tr>
+    <?php for($x = 0; $x < 4; $x++){
+      ?>
+    <tr>
+      <td><?php echo date("d-m-Y", strtotime($date[$x])); ?></td>
+      <td><?php echo $fxas[$x]; ?></td>
+      <td><?php echo $wdspfyas[$x]; ?></td>
+      <td><?php echo $stpfyas[$x]; ?></td>
+      <td><?php
+      switch($wnddirfyas[$x]){
+        case $wnddirfyas[$x] >= 0.00 && $wnddirfyas[$x] <= 11.25:
           echo "North";
           break;
-        case $wnddirfyas[0] >= 11.25 && $wnddirfyas[0] <= 33.75:
+        case $wnddirfyas[$x] >= 11.25 && $wnddirfyas[$x] <= 33.75:
           echo "North-northeast";
           break;
-        case $wnddirfyas[0] >= 33.75 && $wnddirfyas[0] <= 56.25:
+        case $wnddirfyas[$x] >= 33.75 && $wnddirfyas[$x] <= 56.25:
           echo "North-east";
           break;
-        case $wnddirfyas[0] >= 56.25 && $wnddirfyas[0] <= 78.75:
+        case $wnddirfyas[$x] >= 56.25 && $wnddirfyas[$x] <= 78.75:
           echo "East-northeast";
           break;
-        case $wnddirfyas[0] >= 78.75 && $wnddirfyas[0] <= 101.25:
+        case $wnddirfyas[$x] >= 78.75 && $wnddirfyas[$x] <= 101.25:
           echo "East";
           break;
-        case $wnddirfyas[0] >= 101.25 && $wnddirfyas[0] <= 123.75:
+        case $wnddirfyas[$x] >= 101.25 && $wnddirfyas[$x] <= 123.75:
           echo "East-southeast";
           break;
-        case $wnddirfyas[0] >= 123.75 && $wnddirfyas[0] <= 146.25:
+        case $wnddirfyas[$x] >= 123.75 && $wnddirfyas[$x] <= 146.25:
           echo "South-east";
           break;
-        case $wnddirfyas[0] >= 146.25 && $wnddirfyas[0] <= 168.75:
+        case $wnddirfyas[$x] >= 146.25 && $wnddirfyas[$x] <= 168.75:
           echo "South-southeast";
           break;
-        case $wnddirfyas[0] >= 168.75 && $wnddirfyas[0] <= 191.25:
+        case $wnddirfyas[$x] >= 168.75 && $wnddirfyas[$x] <= 191.25:
           echo "South";
           break;
-        case $wnddirfyas[0] >= 191.25 && $wnddirfyas[0] <= 213.75:
+        case $wnddirfyas[$x] >= 191.25 && $wnddirfyas[$x] <= 213.75:
           echo "South-southwest";
           break;
-        case $wnddirfyas[0] >= 213.75 && $wnddirfyas[0] <= 236.25:
+        case $wnddirfyas[$x] >= 213.75 && $wnddirfyas[$x] <= 236.25:
           echo "South-west";
           break;
-        case $wnddirfyas[0] >= 236.25 && $wnddirfyas[0] <= 258.75:
+        case $wnddirfyas[$x] >= 236.25 && $wnddirfyas[$x] <= 258.75:
           echo "West-southwest";
           break;
-        case $wnddirfyas[0] >= 258.75 && $wnddirfyas[0] <= 281.25:
+        case $wnddirfyas[$x] >= 258.75 && $wnddirfyas[$x] <= 281.25:
           echo "West";
           break;
-        case $wnddirfyas[0] >= 281.25 && $wnddirfyas[0] <= 303.75:
+        case $wnddirfyas[$x] >= 281.25 && $wnddirfyas[$x] <= 303.75:
           echo "West-northwest";
           break;
-        case $wnddirfyas[0] >= 303.75 && $wnddirfyas[0] <= 326.25:
+        case $wnddirfyas[$x] >= 303.75 && $wnddirfyas[$x] <= 326.25:
           echo "North-west";
           break;
-        case $wnddirfyas[0] >= 326.25 && $wnddirfyas[0] <= 348.75:
+        case $wnddirfyas[$x] >= 326.25 && $wnddirfyas[$x] <= 348.75:
           echo "North-northwest";
           break;
-        case $wnddirfyas[0] >= 348.75 && $wnddirfyas[0] <= 360.00:
+        case $wnddirfyas[$x] >= 348.75 && $wnddirfyas[$x] <= 360.00:
           echo "North";
           break;
         default:
           echo "werkt niet";
-      }
+      } 
+          ?>
+        </td>
+    </tr>
+  <?php } ?>
+  <tr>
+    <td colspan="5"><input class="buttonlive" type="button" onClick="history.go(0)" value="Refresh"></button></td>
+  </tr>
+  <tr>
+    <td colspan="5"><a class="buttondata" href="viewdata.php">View all data</a></td>
+  </tr>
+</table>
+
+<?php
+if(!empty($_GET["name"])){
+  $_SESSION["currname"] = $_GET["name"];
+}
 } else {
     echo "<p>No data available</p>";
 }
@@ -239,7 +289,7 @@ var chart = new Chart(ctx, {
 </script>
   </div>
   <div class="rightrightcolumn">
-      <h3 style="background-color: #0761aa; padding: 10px; color: white;">Air pressure</h3>
+      <h3 style="background-color: #0761aa; padding: 10px; margin-left: 10px; color: white;">Air pressure</h3>
 
     <canvas id="myChart1" width="100%" height="75px"></canvas>
 
@@ -296,9 +346,7 @@ var chart = new Chart(ctx, {
 
 </script>
 </div>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<h3 style="background-color: #0761aa; padding: 10px; color: white;">Wind direction</h3>
+<h3 style="background-color: #0761aa; padding: 10px; margin-top: 525px; color: white;">Wind direction</h3>
 
 <canvas id="myChart2" width="100%" height="20px"></canvas>
 
@@ -355,9 +403,7 @@ var chart = new Chart(ctx, {
 </div>
 </div>
 </div>
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+
 
 <script>
 function searchFunction() {
@@ -431,8 +477,25 @@ src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
 });
 map.addLayer(vectorLayer);
 }
-  </script>
+
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("content");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
 </script>
 
+<div class="footer">
+<?php
+echo "&copy; " . date("Y") . " SpaceGems";
+?>
+</div>
 </body>
 </html>

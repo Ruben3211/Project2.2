@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-<?php 
+<?php
 include('include.php');
+
+if(!empty($_POST))
+{
+  if(($_POST["admin"])){
+  	$admin = 1;
+  } else {
+  	$admin = 0;
+  }
+  $username = $_POST["username"];
+	$password1 = mysqli_real_escape_string($db, $_POST['pwd1']);
+	$password2= mysqli_real_escape_string($db, $_POST['pwd2']);
+
+if($password1 === $password2){
+if(is_geldig_wachtwoord($password1))//controleert of het eerste wachtwoord geldig is.
+	{
+
+$pwh = password_hash($password1, PASSWORD_DEFAULT);
+$query =  "INSERT INTO usr (username, password, is_admin) VALUES ('$username', '$pwh', '$admin')";
+  $result = mysqli_query($db, $query) or die("FOUT" . mysqli_error($db));
+  ?>
+  	<p>User <?php echo $username ?> is added</p>
+    <META HTTP-EQUIV="refresh" CONTENT="5">
+<?php
+  }
+
+else {
+	$foutmeldingen[] = "Ongeldig wachtwoord";
+}
+
+}
+else{
+$foutmeldingen[] = "new passwords do not match";
+  }
+}
+
+// Print de fouten en meldingen naar het scherm.
+print_fouten();
+print_meldingen();
 ?>
-<script type="text/javascript">
-
-  function checkPassword(str)
-  {
-    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-    return re.test(str);
-  }
-
-  function checkForm(form)
-  {
-    if(form.username.value == "") {
-      alert("Error: Username cannot be blank!");
-      form.username.focus();
-      return false;
-    }
-    re = /^\w+$/;
-    if(!re.test(form.username.value)) {
-      alert("Error: Username must contain only letters, numbers and underscores!");
-      form.username.focus();
-      return false;
-    }
-    if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
-      if(!checkPassword(form.pwd1.value)) {
-        alert("The password you have entered is not valid!");
-        form.pwd1.focus();
-        return false;
-      }
-    } 
-    return true;
-  }
-
-</script>
 <title>Admin <?php echo $_SESSION["username"]; ?></title>
 </head>
 
@@ -97,7 +103,7 @@ if(!empty($_SESSION["newacc"])){
 		}
 ?>
 	</table>
-<?php 
+<?php
 if(empty($_GET[addaccount])) {
 ?>
 <div class="adminbutton">
@@ -109,7 +115,7 @@ if(!empty($_GET["username"]) && $_GET["username"] != oneraadmin && $_GET["userna
 	$sql = "DELETE FROM usr WHERE username='".$_GET['username']."'";
 	$_SESSION["delacc"] = $_GET['username'];
 	print('<meta http-equiv="refresh" content="0; URL=admin.php">');
-	
+
 	if ($db->query($sql) === TRUE) {
 	    print('<meta http-equiv="refresh" content="0; URL=admin.php">');
 	} else {
@@ -120,7 +126,7 @@ if(!empty($_GET["username"]) && $_GET["username"] != oneraadmin && $_GET["userna
 if(!empty($_GET["addaccount"]) && $_GET["addaccount"] == "addaccount"){
 ?>
 <div class="h2admin">Add user</div>
-<form method="POST" action="newaccount.php" onsubmit="return checkForm(this);">
+<form method="POST" action="admin.php" onsubmit="return checkForm(this);">
 <table>
 	<tr>
 		<td>Username</td>

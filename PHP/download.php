@@ -1,14 +1,11 @@
 <?php
 
-$dir = 'Data';
-$zip_file = 'alldata.zip';
-
 // Get real path for our folder
-$rootPath = realpath($dir);
+$rootPath = realpath('Data/');
 
 // Initialize archive object
 $zip = new ZipArchive();
-$zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+$zip->open('data.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
 // Create recursive directory iterator
 /** @var SplFileInfo[] $files */
@@ -34,16 +31,16 @@ foreach ($files as $name => $file)
 // Zip archive will be created only after closing object
 $zip->close();
 
-
-header('Content-Description: File Transfer');
-header('Content-Type: application/octet-stream');
-header('Content-Disposition: attachment; filename='.basename($zip_file));
-header('Content-Transfer-Encoding: binary');
-header('Expires: 0');
-header('Cache-Control: must-revalidate');
+$filename = 'data.zip'; // of course find the exact filename....        
 header('Pragma: public');
-header('Content-Length: ' . filesize($zip_file));
-readfile($zip_file);
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Cache-Control: private', false); // required for certain browsers 
+header('Content-Type: application/pdf');
 
-exit();
+header('Content-Disposition: attachment; filename="'. basename($filename) . '";');
+header('Content-Transfer-Encoding: binary');
+header('Content-Length: ' . filesize($filename));
+
+readfile($filename);
 ?>

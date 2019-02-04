@@ -1,4 +1,10 @@
 <?php
+
+function is_geldig_wachtwoord($wachtwoord)
+{
+  return (preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,64}$/', $wachtwoord) == 1);
+}
+
 error_reporting(E_ERROR | E_PARSE);
 
 function do_login($id, $timeout, $username, $is_admin)
@@ -13,7 +19,7 @@ function do_login($id, $timeout, $username, $is_admin)
 function fout($melding) {
   global $fout;
   global $foutmeldingen;
-  $foutmeldingen[] = $melding; 
+  $foutmeldingen[] = $melding;
   $fout = true;
 }
 
@@ -49,4 +55,6 @@ function auto_copyright($year = 'auto'){
    if(intval($year) < date('Y')){ echo intval($year) . ' - ' . date('Y'); }
    if(intval($year) > date('Y')){ echo date('Y'); }
 }
+
+
 ?>

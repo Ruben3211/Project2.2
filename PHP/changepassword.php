@@ -15,6 +15,8 @@ if(!empty($_POST))
 	$password2= mysqli_real_escape_string($db, $_POST['npassword2']);
 
 if($password1 === $password2){
+if(is_geldig_wachtwoord($password1))//controleert of het eerste wachtwoord geldig is.
+	{
 	$query = "SELECT * FROM usr WHERE username ='" . $_SESSION["username"] ."'";
 	$result = mysqli_query($db, $query) or die("FOUT : " . mysqli_error($db));
   $row = mysqli_fetch_assoc($result);
@@ -25,12 +27,15 @@ $query = "UPDATE usr SET password ='". $pwh . "' WHERE idusr ='". $_SESSION["usr
 $meldingen[] = "U wachtwoord is succesvol gewijzigd.  <br />Als u na 5 seconden niet wordt doorverwezen, <a href=\"login.php\">klik dan hier</a>.";
 print('<meta http-equiv="refresh" content="5; URL=index.php">');
   }
-  else{
-    $foutmeldingen[] = "password is not correct";
-  }
-
+	else{
+		$foutmeldingen[] = "password is not correct";
+	}
+}
+else {
+	$foutmeldingen[] = "Ongeldig wachtwoord";
 }
 
+}
 else{
 $foutmeldingen[] = "new passwords do not match";
   }
@@ -73,7 +78,7 @@ print_meldingen();
 	</div>
 </div>
 
+<div class="footer">
 <?php
-	// hier moet de footer
-
-  ?>
+echo "&copy; " . date("Y") . " SpaceGems";
+?>
