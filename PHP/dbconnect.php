@@ -1,8 +1,8 @@
 <?php
 // 1. Connectie leggen met de database
 $dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
+$dbuser = "onera";
+$dbpass = "Frankarm";
 $dbname = "onera";
 $db = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
  // Test of de verbinding werkt!
