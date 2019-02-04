@@ -49,4 +49,6 @@ function auto_copyright($year = 'auto'){
    if(intval($year) < date('Y')){ echo intval($year) . ' - ' . date('Y'); }
    if(intval($year) > date('Y')){ echo date('Y'); }
 }
+
+
 ?>

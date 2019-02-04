@@ -42,6 +42,7 @@ include('include.php');
 <body>
 <?php
 
+
 $sql = "SELECT username, is_admin FROM usr";
 $result = $db->query($sql);
 

@@ -61,7 +61,7 @@
   padding: 12px;
   text-decoration: none;
   font-size: 18px;
-  color: black;
+  color: #0761aa;
   display: block
 }
 
@@ -83,6 +83,11 @@ body {
   font-family: Arial;
   padding: 10px;
   background-color: #f6f6f6;
+}
+
+.sticky {
+  position: fixed;
+  width: 100%;
 }
 
 /* Header/Blog Title */
@@ -235,7 +240,7 @@ body {
 
 .vertical-menu a {
   background-color: #0761aa;
-  color: black;
+  color: #0761aa;
   display: block;
   padding: 12px;
   text-decoration: none;
