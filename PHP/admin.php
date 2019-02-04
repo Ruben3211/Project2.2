@@ -22,6 +22,10 @@ if(is_geldig_wachtwoord($password1))//controleert of het eerste wachtwoord geldi
 $pwh = password_hash($password1, PASSWORD_DEFAULT);
 $query =  "INSERT INTO usr (username, password, is_admin) VALUES ('$username', '$pwh', '$admin')";
   $result = mysqli_query($db, $query) or die("FOUT" . mysqli_error($db));
+  ?>
+  	<p>User <?php echo $username ?> is added</p>
+    <META HTTP-EQUIV="refresh" CONTENT="5">
+<?php
   }
 
 else {
