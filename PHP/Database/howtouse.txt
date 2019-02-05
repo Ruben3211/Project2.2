@@ -1,0 +1,4 @@
+First create a database called onera
+Then Run the script from this folder in that database
+To connect to the database edit the dbconnect from the php folder.
+The default password of the users are Frankarm
