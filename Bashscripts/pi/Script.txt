@@ -1,0 +1,15 @@
+#!/bin/sh
+/etc/init.d/noip2 restart
+
+dt=$(date)
+
+echo "ik heb gedraaid om" $dt
+
+
+
+
+
+
+
+
+
