@@ -3,7 +3,12 @@
 <head>
 <?php
 include('include.php');
-
+if($_SESSION['is_admin'] == 0){
+?>
+<meta http-equiv="refresh" content= "0; url=index.php" />
+<?php
+}
+else{
 if(!empty($_POST))
 {
   if(($_POST["admin"])){
@@ -162,6 +167,7 @@ if(!empty($_GET["addaccount"]) && $_GET["addaccount"] == "addaccount"){
 </div>
 </div>
 <?php
+}
 }
 ?>
 </body>
